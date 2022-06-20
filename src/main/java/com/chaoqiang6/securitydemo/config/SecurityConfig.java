@@ -23,9 +23,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .loginPage("/login.html")
                 //注意，此处的forwordurl必须是post请求
-                .successForwardUrl("/login");
+                .successForwardUrl("/login")
+                .failureForwardUrl("/toError");
+
+
         http.authorizeRequests()
                 .antMatchers("/login.html").permitAll()
+                .antMatchers("/error.html").permitAll()
                 .anyRequest().authenticated();
         //关闭csrf防护
         http.csrf().disable();
